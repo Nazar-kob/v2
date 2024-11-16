@@ -22,7 +22,7 @@ Please follow the instructions in each of the steps. With each instruction, it w
 - What is a software development without bugs and errors right ?
   - **Objective:** Run `docker compose up` and see if there is any errors with existing configuration in the project and fix any issues.
 - We are using Webpack to bundle any static resources. In the traditional way, we have to run npm webpack to run the Webpack process and python manage.py runserver to run the Django server. This can be simplified using Docker to run both processes at once.
-  - **Objective:**  Simplify this process so that when we run `docker compose up`, it will run the Django server as well as run Webpack in the background.
+  - **Objective:** Simplify this process so that when we run `docker compose up`, it will run the Django server as well as run Webpack in the background.
 - How do you access data/resources from the database? The answer is APIs!
   - **Objective:** Write a basic RESTful API for CRUD operations for VM model (view, serializer, etc) using Django Rest Framework (DRF)
 - Now you have the API, but how are you going to present the data? It is frontend time!
@@ -40,3 +40,9 @@ Shoot us an email if you have any questions regarding this assessment
 
 - Plagiarism is a serious offense and will result in disqualification from further consideration.
 - Please delete the whole source code once the assignment is submitted
+
+  1.Add poetry pack manager
+
+  2. update webpack add ts / need to delete bable
+
+  3. add tailwind and shadcn elements

@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "target": "ES6",
+    "lib": ["DOM", "ES6"],
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "jsx": "react",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "baseUrl": "./", 
+    "paths": {
+      "@ui/*": ["react/components/ui/*"]
+    }
+  },
+  "include": ["frontend/**/*"],
+  "exclude": ["node_modules", "build"]
+}

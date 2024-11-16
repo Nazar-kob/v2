@@ -9,29 +9,30 @@ module.exports = {
 	module: {
 		rules: [
 			 {
-				  test: /\.(js|jsx)$/,
+				  test: /\.js?$/,
 				  exclude: /(node_modules)/,
-				  use: {
+				//   use: "ts-loader", 
+					use: {
 						loader: 'babel-loader',
 						options: {
-							 presets: [
-								  ["@babel/preset-env", {
+							presets: [
+								["@babel/preset-env", {
 										"useBuiltIns": "usage",
 										"corejs": 3,
-								  }],
-								  "@babel/preset-react"
-							 ],
-							 plugins: [
-								  '@babel/plugin-proposal-class-properties',
-								  '@babel/plugin-proposal-private-methods'
-							 ]
+								}],
+								"@babel/preset-react"
+							],
+							plugins: [
+								'@babel/plugin-proposal-class-properties',
+								'@babel/plugin-proposal-private-methods'
+							]
 						}
-				  }
+				}
 			 }
 		]
   },
   resolve: {
-	extensions: ['.js', '.jsx'],  // Allows importing without specifying extensions
+	extensions: ['.js'], 
 	},
 	mode: 'development',
 }
