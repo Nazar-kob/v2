@@ -1,3 +1,7 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import Server, Vm, SshKey
+
+admin.site.register(Server)
+admin.site.register(Vm)
+admin.site.register(SshKey)
