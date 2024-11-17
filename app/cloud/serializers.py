@@ -2,6 +2,11 @@ from rest_framework import serializers
 from .models import Vm, SshKey, Server
 
 
+class ServerSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Server
+        fields = ('id', 'name')
+
         
 
 class VmSerializer(serializers.ModelSerializer):
@@ -28,13 +33,14 @@ class VmCreateSerializer(serializers.ModelSerializer):
 class SshKeySerializer(serializers.ModelSerializer):
     class Meta:
         model = SshKey
-        fields = ('id', 'name') 
+        fields = ('id', 'name', 'public_key') 
 
 
 class VmDetailSerializer(serializers.ModelSerializer):
     
     ssh_keys = SshKeySerializer(
         many=True,
+        read_only=True
     )
     
     server = serializers.CharField(source='server.name')
