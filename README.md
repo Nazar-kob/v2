@@ -43,6 +43,6 @@ Shoot us an email if you have any questions regarding this assessment
 
   1.Add poetry pack manager
 
-  2. update webpack add ts / need to delete bable
+  2. update webpack add ts / i use poetry insted of req.txt
 
   3. add tailwind and shadcn elements

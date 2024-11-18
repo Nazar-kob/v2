@@ -1,38 +1,26 @@
-const path = require('path')
+const path = require('path');
 
 module.exports = {
-	entry: "./frontend/static/js/index.js",
+    entry: "./frontend/static/js/index.tsx",
 	output: { 
 		filename: "bundle.js",
 		path: path.resolve("frontend/static")
 	},
-	module: {
-		rules: [
-			 {
-				  test: /\.js?$/,
-				  exclude: /(node_modules)/,
-				//   use: "ts-loader", 
-					use: {
-						loader: 'babel-loader',
-						options: {
-							presets: [
-								["@babel/preset-env", {
-										"useBuiltIns": "usage",
-										"corejs": 3,
-								}],
-								"@babel/preset-react"
-							],
-							plugins: [
-								'@babel/plugin-proposal-class-properties',
-								'@babel/plugin-proposal-private-methods'
-							]
-						}
-				}
-			 }
-		]
-  },
-  resolve: {
-	extensions: ['.js'], 
-	},
-	mode: 'development',
-}
+    resolve: {
+        extensions: ['.tsx', '.ts', ".js"],
+    },
+    module: {
+        rules: [
+            {
+                test: /\.tsx?$/,
+                use: 'ts-loader',
+                exclude: /node_modules/,
+            },
+        ],
+    },
+    devServer: {
+        contentBase: path.join(__dirname, 'dist'),
+        hot: true, // Enable hot reload
+      },
+    mode: 'production',
+};

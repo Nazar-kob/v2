@@ -10,6 +10,7 @@ webpack-stats.json
 frontend/static/**/*__.js.*
 frontend/static/**/*__.js
 .venv
+.mypy_cache
 .ruff_cache
 .env
 db.sqlite3

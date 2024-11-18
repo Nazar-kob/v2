@@ -8,7 +8,7 @@
 	"scripts": {
 		"dev": "webpack --config webpack.config.js --watch --mode development",
 		"build:css": "npx tailwindcss -i ./frontend/static/main.css -o ./frontend/static/tailwind.css --minify --watch",
-		"build:ts": "npx webpack --config webpack.config.ts.js  --watch --mode development"
+		"build:ts": "npx webpack --config webpack.config.js  --watch --mode development"
 	},
 	"devDependencies": {
 		"@babel/cli": "^7.23.4",

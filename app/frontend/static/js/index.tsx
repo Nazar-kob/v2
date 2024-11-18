@@ -3,6 +3,8 @@ import { createRoot } from "react-dom/client";
 
 import App from "../react/App";
 
+// In ideal better to organize the system routes and context data in a separate file
+
 class IndexPage {
   private context: object;
 
@@ -11,7 +13,7 @@ class IndexPage {
       "context-data"
     ) as HTMLDivElement | null;
     if (contextElement) {
-      const jsonData = contextElement.getAttribute("json") || "{}";
+      const jsonData = contextElement.getAttribute("json") || "{}"; // we can use some context data from the server useing this approach
       this.context = JSON.parse(jsonData);
     } else {
       console.warn("Context element not found. Using default context.");
@@ -20,12 +22,10 @@ class IndexPage {
   }
 
   init() {
-    console.log("Initializing React app...");
     const root = createRoot(
       document.getElementById("react-component") as HTMLDivElement
     );
     root.render(<App {...this.context} />);
-    console.log("React app initialized.");
   }
 }
 
