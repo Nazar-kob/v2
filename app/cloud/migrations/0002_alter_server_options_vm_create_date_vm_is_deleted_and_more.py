@@ -5,6 +5,20 @@ import django.utils.timezone
 from django.db import migrations, models
 
 
+def load_initial_data(apps, schema_editor):
+    server_modal = apps.get_model('cloud', 'Server')
+    server_modal.objects.create (
+        name="USA", region="North America"
+        )
+    server_modal.objects.create (
+        name="EU", region="Europe"
+        )
+    server_modal.objects.create (
+        name="ASIA", region="Asia"
+    )
+    
+
+
 class Migration(migrations.Migration):
 
     dependencies = [
@@ -58,4 +72,5 @@ class Migration(migrations.Migration):
                 ('vms', models.ManyToManyField(related_name='ssh_keys', to='cloud.vm')),
             ],
         ),
+        migrations.RunPython(load_initial_data),
     ]

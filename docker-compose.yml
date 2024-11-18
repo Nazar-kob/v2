@@ -6,20 +6,18 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data/
     environment:
-      - POSTGRES_USER=hello_django
-      - POSTGRES_PASSWORD=hello_django
-      - POSTGRES_DB=hello_django_dev
+      - POSTGRES_USER=${SQL_USER:-hello_django}
+      - POSTGRES_PASSWORD=${SQL_PASSWORD:-hello_django}
+      - POSTGRES_DB=${SQL_DATABASE:-hello_django_dev}
 
   django:
     build: ./app
     volumes:
       - static_volume:/app/frontend/static/
-
     env_file:
       - ./app/.env.dev
     ports:
       - 127.0.0.1:8000:8000
-
     depends_on:
       - db
 
