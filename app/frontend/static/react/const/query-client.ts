@@ -7,6 +7,7 @@ import {
 export enum queryClientKeys {
     VirtualMachines = 'virtual-machines',
     Servers = 'servers',
+
 }
 
 export const queryClient = new QueryClient()

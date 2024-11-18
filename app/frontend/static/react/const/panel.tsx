@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Server, Monitor } from "lucide-react";
 import { VmTablet } from "../components/custom/VmTablet/VmTablet";
+import ServersTablet from "../components/custom/ServerTablet/ServersTablet";
 
 enum AppPanel {
   Servers = "Servers",
@@ -19,7 +20,7 @@ const sidebarItems = [
 ];
 
 const panels = {
-  [AppPanel.Servers]: <div>Servers</div>,
+  [AppPanel.Servers]: <ServersTablet />,
   [AppPanel.VirtualMachines]: <VmTablet />,
 };
 

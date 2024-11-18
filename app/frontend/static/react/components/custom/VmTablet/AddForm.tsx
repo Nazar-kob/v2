@@ -48,8 +48,8 @@ export function AddForm({ closeModal }: { closeModal: () => void }) {
   const servers = useGetServices();
 
   const mutation = useMutation({
-    mutationFn: (newVm: VmType) => {
-      return fetch("/api/vms/", {
+    mutationFn: async (newVm: VmType) => {
+      return await fetch("/api/vms/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
