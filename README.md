@@ -1,3 +1,60 @@
+# Project Overview
+
+This project includes several significant updates and improvements aimed at optimizing both the development workflow and the application's performance.
+
+## Key Changes
+
+1. Replaced package managers:
+
+   - **Poetry** for Python.
+   - **Yarn** for TypeScript.
+
+2. Migrated the entire project from **JavaScript** to **TypeScript**.
+
+3. Added styling tools:
+
+   - **TailwindCSS** for responsive and modern designs.
+   - **shadcn/ui** for pre-built components.
+
+4. Backend Improvements:
+
+   - Created **endpoints** to fetch data from the backend.
+   - Wrote **tests** for these endpoints using the **TDD** (Test-Driven Development) approach.
+
+5. Minimal Interface (MVP):
+
+   - Features include:
+     - Adding a new virtual machine.
+     - Viewing the list of machines.
+     - Deleting virtual machines.
+   - Editing functionality is planned but not yet implemented due to time constraints.
+
+6. Deployment Updates:
+
+   - Configured deployment process.
+   - Updated **Dockerfile** to include the latest versions of Node.js and Python.
+
+7. Docker Setup:
+   - Configured **docker-compose**.
+   - Added database integration.
+
+---
+
+## Thoughts on the Architecture
+
+I highly appreciate the idea of integrating **Webpack** with Django. Moving towards **server-side rendering (SSR)** offers several benefits:
+
+- Reduces frontend load.
+- Enables rendering pages as separate components.
+
+While this approach might result in a larger Webpack file, the advantages for scalability and performance outweigh the downsides.
+
+---
+
+## Feedback
+
+Looking forward to your feedback and suggestions!
+
 # Introduction
 
 V2 Cloud would like to congratulate you for reaching this stage. This will be a take-home assignment for you and needs to be completed within 3 days upon receiving it. Once the assignment has been submitted, there will be a follow-up interview with our team members to give you a chance to walk through what you have done for this assignment, as well as to answer some follow-up questions.
@@ -40,9 +97,3 @@ Shoot us an email if you have any questions regarding this assessment
 
 - Plagiarism is a serious offense and will result in disqualification from further consideration.
 - Please delete the whole source code once the assignment is submitted
-
-  1.Add poetry pack manager
-
-  2. update webpack add ts / i use poetry insted of req.txt
-
-  3. add tailwind and shadcn elements
