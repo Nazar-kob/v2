@@ -7,7 +7,6 @@ class ServerSerializer(serializers.ModelSerializer):
         model = Server
         fields = ('id', 'name')
 
-        
 
 class VmSerializer(serializers.ModelSerializer):
     

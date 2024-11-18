@@ -19,5 +19,9 @@ module.exports = {
             },
         ],
     },
+    devServer: {
+        contentBase: path.join(__dirname, 'dist'),
+        hot: true, // Enable hot reload
+      },
     mode: 'development',
 };

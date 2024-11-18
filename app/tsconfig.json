@@ -9,9 +9,9 @@
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "baseUrl": "./", 
+    "baseUrl": "./frontend/react", 
     "paths": {
-      "@ui/*": ["react/components/ui/*"]
+      "@": ["../../ui/*"]
     }
   },
   "include": ["frontend/**/*"],
