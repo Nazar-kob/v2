@@ -5,10 +5,10 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "../../ui/table";
+} from "@/components/ui/table";
 import { ServerRaw } from "./ServerRaw";
 import { AddModal } from "./AddModal";
-import { useGetServices } from "../../../hooks/use-get-services";
+import { useGetServices } from "@/hooks/use-get-services";
 
 export function ServersTablet() {
   const data = useGetServices();

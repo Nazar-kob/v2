@@ -10,9 +10,9 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarProvider,
-} from "../../ui/sidebar";
+} from "@/components/ui/sidebar";
 
-import { AppPanel, sidebarItems } from "../../../const/panel";
+import { AppPanel, sidebarItems } from "@/const/panel";
 
 export function AppSidebar({
   children,

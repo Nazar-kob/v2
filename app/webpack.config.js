@@ -8,11 +8,17 @@ module.exports = {
 	},
     resolve: {
         extensions: ['.tsx', '.ts', ".js"],
+        alias: {
+            '@/components': path.resolve(__dirname, 'frontend/static/react/components'),
+            '@/const': path.resolve(__dirname, 'frontend/static/react/const'),
+            '@/ui': path.resolve(__dirname, 'frontend/static/react/components/ui'),
+            '@/hooks': path.resolve(__dirname, 'frontend/static/react/hooks')
+          },
     },
     module: {
         rules: [
             {
-                test: /\.tsx?$/,
+                test: /\.(ts|tsx)$/,
                 use: 'ts-loader',
                 exclude: /node_modules/,
             },

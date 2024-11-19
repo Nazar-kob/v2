@@ -5,15 +5,15 @@ import * as React from "react";
 import {
   Sheet,
   SheetContent,
-  SheetDescription,
   SheetHeader,
   SheetTitle,
-} from "../../ui/sheet";
+} from "@/components/ui/sheet";
 
-import { toast } from "../../../hooks/use-toast";
+import { toast } from "@/hooks/use-toast";
 import { useQuery } from "@tanstack/react-query";
-import { queryClientKeys } from "../../../const/query-client";
-import { EditForm, VmDetail } from "./EditForm";
+import { queryClientKeys } from "@/const/query-client";
+import { EditForm } from "./EditForm";
+import { VmDetail } from "./hooks-and-types";
 
 export const getVmDetail = async (id: number): Promise<VmDetail> => {
   const res = await fetch(`/api/vms/${id}/`, {

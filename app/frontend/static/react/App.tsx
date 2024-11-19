@@ -1,5 +1,5 @@
 import React, { Suspense, useState } from "react";
-import { AppSidebar } from "./components/custom/AppSidebar/AppSidebar";
+import { AppSidebar } from "@/components/custom/AppSidebar/AppSidebar";
 import { AppPanel, panels } from "./const/panel";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { queryClient } from "./const/query-client";

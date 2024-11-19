@@ -1,11 +1,10 @@
 import React from "react";
-import { Input } from "../../ui/input";
+import { Input } from "@/components/ui/input";
 
-import { z } from "zod"; // Add new import
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { DialogFooter } from "../../ui/dialog";
-import { Button } from "../../ui/button";
+import { DialogFooter } from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -13,26 +12,16 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "../../ui/form";
+} from "@/components/ui/form";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "../../ui/select";
-import { useGetServices } from "../../../hooks/use-get-services";
-import { useMutation } from "@tanstack/react-query";
-import { toast } from "../../../hooks/use-toast";
-import { queryClient, queryClientKeys } from "../../../const/query-client";
-
-const vmSchema = z.object({
-  name: z.string({ required_error: "Name is required" }),
-  ram: z.number().min(1, { message: "Ram must be greater than 0" }),
-  cpus: z.number().min(1, { message: "CPUS must be greater than 0" }),
-  server_id: z.string(),
-});
-type VmType = z.infer<typeof vmSchema>;
+} from "@/components/ui/select";
+import { useGetServices } from "@/hooks/use-get-services";
+import { useCreateVm, vmSchema, VmType } from "./hooks-and-types";
 
 export function AddForm({ closeModal }: { closeModal: () => void }) {
   const form = useForm<VmType>({
@@ -47,43 +36,16 @@ export function AddForm({ closeModal }: { closeModal: () => void }) {
 
   const servers = useGetServices();
 
-  const mutation = useMutation({
-    mutationFn: async (newVm: VmType) => {
-      const res = await fetch("/api/vms/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(newVm),
-      });
-      if (!res.ok) {
-        throw new Error("Failed to create VM");
-      }
-    },
-    onSuccess: async () => {
-      form.reset();
-      toast({
-        title: "VM created successfully",
-        description: "The VM has been created successfully",
-      });
-      closeModal();
-      queryClient.invalidateQueries({
-        queryKey: [queryClientKeys.VirtualMachines],
-        refetchType: "active",
-      });
-    },
-    onError: (error) => {
-      toast({
-        title: "An error occurred",
-        description: error.message,
-        variant: "error",
-      });
-    },
-  });
+  const mutation = useCreateVm();
+
+  const success = () => {
+    form.reset();
+    closeModal();
+  };
 
   const isLoading = form.formState.isSubmitting || mutation.isPending;
   const onSubmit: SubmitHandler<VmType> = (data) => {
-    mutation.mutate(data);
+    mutation.mutate(data, { onSuccess: success });
   };
 
   return (

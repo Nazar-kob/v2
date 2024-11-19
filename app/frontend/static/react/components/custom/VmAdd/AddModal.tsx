@@ -1,14 +1,14 @@
 import React, { Suspense } from "react";
 
 import { CircleFadingPlus } from "lucide-react";
-import { Button } from "../../ui/button";
+import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "../../ui/dialog";
+} from "@/components/ui/dialog";
 import { AddForm } from "./AddForm";
 import { Loading } from "../Loading/Loading";
 

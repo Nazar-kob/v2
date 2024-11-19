@@ -9,9 +9,12 @@
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "baseUrl": "./frontend/react", 
+    "baseUrl": ".", 
     "paths": {
-      "@": ["../.."]
+      "@/components/*": ["frontend/static/react/components/*"],
+      "@/const/*": ["frontend/static/react/const/*"],
+      "@/ui/*": ["frontend/static/react/components/ui/*"],
+      "@/hooks/*": ["frontend/static/react/hooks/*"]
     }
   },
   "include": ["frontend/**/*"],

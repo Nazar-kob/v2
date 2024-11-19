@@ -1,9 +1,5 @@
 import React from "react";
 
-import { useMutation } from "@tanstack/react-query";
-import { toast } from "../../../hooks/use-toast";
-import { queryClient, queryClientKeys } from "../../../const/query-client";
-
 import {
   AlertDialog,
   AlertDialogAction,
@@ -13,7 +9,8 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from "../../ui/alert-dialog";
+} from "@/components/ui/alert-dialog";
+import { useDeleteVm } from "./hooks-and-types";
 
 export function DeleteAlertDialog({
   id,
@@ -24,30 +21,7 @@ export function DeleteAlertDialog({
   open: boolean;
   setOpen: (open: boolean) => void;
 }) {
-  const mutation = useMutation({
-    mutationFn: (id: number) => {
-      return fetch(`/api/vms/${id}/`, {
-        method: "DELETE",
-      });
-    },
-    onSuccess: async () => {
-      toast({
-        title: "VM deleted successfully",
-        description: "The VM has been deleted successfully",
-      });
-      queryClient.invalidateQueries({
-        queryKey: [queryClientKeys.VirtualMachines],
-        refetchType: "active",
-      });
-    },
-    onError: (error) => {
-      toast({
-        title: "An error occurred",
-        description: error.message,
-        variant: "error",
-      });
-    },
-  });
+  const mutation = useDeleteVm();
 
   const handleClick = () => {
     mutation.mutate(id);

@@ -1,4 +1,4 @@
-import { toast } from "../../../hooks/use-toast";
+import { toast } from "@/hooks/use-toast";
 import React, { ReactNode, ErrorInfo } from "react";
 
 interface ErrorBoundaryProps {

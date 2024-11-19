@@ -1,11 +1,10 @@
 import React from "react";
-import { Input } from "../../ui/input";
+import { Input } from "@/components/ui/input";
 
-import { z } from "zod"; // Add new import
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { DialogFooter } from "../../ui/dialog";
-import { Button } from "../../ui/button";
+import { DialogFooter } from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -13,18 +12,9 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "../../ui/form";
+} from "@/components/ui/form";
 
-import { useGetServices } from "../../../hooks/use-get-services";
-import { useMutation } from "@tanstack/react-query";
-import { toast } from "../../../hooks/use-toast";
-import { queryClient, queryClientKeys } from "../../../const/query-client";
-
-const serverSchema = z.object({
-  name: z.string({ required_error: "Name is required" }),
-  region: z.string({ required_error: "Region is required" }),
-});
-type ServerType = z.infer<typeof serverSchema>;
+import { serverSchema, ServerType, useCreateServer } from "./hooks-and-types";
 
 export function AddForm({ closeModal }: { closeModal: () => void }) {
   const form = useForm<ServerType>({
@@ -35,46 +25,18 @@ export function AddForm({ closeModal }: { closeModal: () => void }) {
     },
   });
 
-  const servers = useGetServices();
+  const mutation = useCreateServer();
 
-  const mutation = useMutation({
-    mutationFn: async (serverValue: ServerType) => {
-      const res = await fetch("/api/servers/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(serverValue),
-      });
-      if (!res.ok) {
-        throw new Error("Error creating server");
-      }
-      return res.json();
-    },
-    onSuccess: async () => {
-      form.reset();
-      toast({
-        title: "Server created successfully",
-        description: "The Server has been created successfully",
-      });
-      closeModal();
-      queryClient.invalidateQueries({
-        queryKey: [queryClientKeys.Servers],
-        refetchType: "active",
-      });
-    },
-    onError: (error) => {
-      toast({
-        title: "An error occurred",
-        description: error.message,
-        variant: "error",
-      });
-    },
-  });
+  function success() {
+    form.reset();
+    closeModal();
+  }
 
   const onSubmit: SubmitHandler<ServerType> = (data) => {
-    mutation.mutate(data);
+    mutation.mutate(data, { onSuccess: success });
   };
+
+  const isLoading = form.formState.isSubmitting || mutation.isPending;
 
   return (
     <Form {...form}>
@@ -106,7 +68,9 @@ export function AddForm({ closeModal }: { closeModal: () => void }) {
           )}
         />
         <DialogFooter>
-          <Button type="submit">Save</Button>
+          <Button disabled={isLoading} type="submit">
+            Save
+          </Button>
         </DialogFooter>
       </form>
     </Form>

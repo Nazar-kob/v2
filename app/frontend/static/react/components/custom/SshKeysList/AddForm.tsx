@@ -1,11 +1,10 @@
 import React from "react";
-import { Input } from "../../ui/input";
+import { Input } from "@/components/ui/input";
 
-import { z } from "zod"; // Add new import
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { DialogFooter } from "../../ui/dialog";
-import { Button } from "../../ui/button";
+import { DialogFooter } from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -13,17 +12,10 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "../../ui/form";
-import { useMutation } from "@tanstack/react-query";
-import { toast } from "../../../hooks/use-toast";
-import { queryClient, queryClientKeys } from "../../../const/query-client";
-import { Textarea } from "../../ui/textarea";
-
-const sshKeySchema = z.object({
-  name: z.string({ required_error: "Name is required" }),
-  public_key: z.string({ required_error: "Public key is required" }),
-});
-type SshKeyType = z.infer<typeof sshKeySchema>;
+} from "@/components/ui/form";
+import { queryClient, queryClientKeys } from "@/const/query-client";
+import { Textarea } from "@/components/ui/textarea";
+import { sshKeySchema, SshKeyType, useCreateSshKey } from "./hooks-and-types";
 
 interface PropsAddForm {
   vmId: number;
@@ -38,42 +30,19 @@ export function AddForm({ vmId }: PropsAddForm) {
     },
   });
 
-  const mutation = useMutation({
-    mutationFn: async (newKey: SshKeyType) => {
-      const res = await fetch(`/api/vms/${vmId}/ssh-keys/`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(newKey),
-      });
-      if (!res.ok) {
-        throw new Error("Failed to create Key");
-      }
-    },
-    onSuccess: async () => {
-      form.reset();
-      toast({
-        title: "Ssh Key created successfully",
-        description: "The Ssh Key has been created successfully",
-      });
-      queryClient.invalidateQueries({
-        queryKey: [queryClientKeys.VirtualMachinesDetailSshKeys, vmId],
-        refetchType: "active",
-      });
-    },
-    onError: (error) => {
-      toast({
-        title: "An error occurred",
-        description: error.message,
-        variant: "error",
-      });
-    },
-  });
+  const mutation = useCreateSshKey();
+
+  function success() {
+    form.reset();
+    queryClient.invalidateQueries({
+      queryKey: [queryClientKeys.VirtualMachinesDetailSshKeys, vmId],
+      refetchType: "active",
+    });
+  }
 
   const isLoading = form.formState.isSubmitting || mutation.isPending;
   const onSubmit: SubmitHandler<SshKeyType> = (data) => {
-    mutation.mutate(data);
+    mutation.mutate({ ...data, vmId: vmId }, { onSuccess: success });
   };
 
   return (

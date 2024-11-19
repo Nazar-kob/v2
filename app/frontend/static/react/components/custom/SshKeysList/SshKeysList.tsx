@@ -1,20 +1,19 @@
 import React from "react";
+import { useQuery } from "@tanstack/react-query";
 
-import { Button } from "../../ui/button";
 import {
   Dialog,
   DialogContent,
   DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "../../ui/dialog";
-import { useQuery } from "@tanstack/react-query";
-import { queryClientKeys } from "../../../const/query-client";
-import { toast } from "../../../hooks/use-toast";
+} from "@/components/ui/dialog";
+
+import { queryClientKeys } from "@/const/query-client";
+import { toast } from "@/hooks/use-toast";
 import { ISshKey, SshKey } from "./SshKey";
 import { AddForm } from "./AddForm";
-import { Accordion } from "../../ui/accordion";
+import { Accordion } from "@/components/ui/accordion";
 
 interface SshKeysListProps {
   vmId: number;

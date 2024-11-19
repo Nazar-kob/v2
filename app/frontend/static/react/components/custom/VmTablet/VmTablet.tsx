@@ -5,20 +5,12 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "../../ui/table";
+} from "@/components/ui/table";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { VmRaw } from "./VmRaw";
+import { queryClientKeys } from "@/const/query-client";
 import { AddModal } from "../VmAdd/AddModal";
-import { queryClientKeys } from "../../../const/query-client";
-
-interface VirtualMachine {
-  id: number;
-  name: string;
-  cpus: number;
-  ram: number;
-  active: boolean;
-  server_name: string;
-}
+import { VirtualMachine } from "./hooks-and-types";
 
 async function getVirtualMachine(): Promise<VirtualMachine[]> {
   const res = await fetch("/api/vms");

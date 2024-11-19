@@ -1,8 +1,8 @@
 import React from "react";
 
-import { TableCell, TableRow } from "../../ui/table";
-import { VirtualMachine } from "./types";
+import { TableCell, TableRow } from "@/components/ui/table";
 import { ActionsBtn } from "./ActionsBtn";
+import { VirtualMachine } from "./hooks-and-types";
 
 export function VmRaw({
   id,
