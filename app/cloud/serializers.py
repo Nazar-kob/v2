@@ -5,7 +5,7 @@ from .models import Vm, SshKey, Server
 class ServerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Server
-        fields = ('id', 'name')
+        fields = ('id', 'name', "region")
 
 
 class VmSerializer(serializers.ModelSerializer):
@@ -37,14 +37,26 @@ class SshKeySerializer(serializers.ModelSerializer):
 
 class VmDetailSerializer(serializers.ModelSerializer):
     
-    ssh_keys = SshKeySerializer(
-        many=True,
-        read_only=True
-    )
     
-    server = serializers.CharField(source='server.name')
+    server_id = serializers.IntegerField()
     
     class Meta:
         model = Vm
-        fields = ('id', 'name', 'cpus', 'ram', 'server', 'active',  'create_date', 'ssh_keys' )
+        fields = ('id', 'name', 'cpus', 'ram', 'active', 'server_id')
+        
+        
+    
+    def update(self, instance, validated_data):
+        instance.name = validated_data.get('name', instance.name)
+        instance.ram = validated_data.get('ram', instance.ram)
+        instance.cpus = validated_data.get('cpus', instance.cpus)
+        instance.active = validated_data.get('active', instance.active)
+        server = Server.objects.get(pk=validated_data['server_id'])
+        if not server:
+            raise serializers.ValidationError("Server not found")
+        
+        instance.server = Server.objects.get(pk=validated_data['server_id'])
+        
+        instance.save()
+        return instance
         

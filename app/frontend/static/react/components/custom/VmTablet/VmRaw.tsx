@@ -19,9 +19,9 @@ export function VmRaw({
       <TableCell>{ram}</TableCell>
       <TableCell>
         {active ? (
-          <div className="h-4 w-4 rounded-full bg-red-500 text-white flex items-center justify-center"></div>
-        ) : (
           <div className="h-4 w-4 rounded-full bg-green-500 text-white flex items-center justify-center opacity-50"></div>
+        ) : (
+          <div className="h-4 w-4 rounded-full bg-red-500 text-white flex items-center justify-center"></div>
         )}
       </TableCell>
       <TableCell>{server_name}</TableCell>

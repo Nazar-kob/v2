@@ -8,7 +8,7 @@ import {
 } from "../../ui/table";
 import { ServerRaw } from "./ServerRaw";
 import { AddModal } from "./AddModal";
-import { useGetServices } from "../../../hooks/get-services";
+import { useGetServices } from "../../../hooks/use-get-services";
 
 export function ServersTablet() {
   const data = useGetServices();

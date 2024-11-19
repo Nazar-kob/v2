@@ -6,7 +6,9 @@ import {
 
 export enum queryClientKeys {
     VirtualMachines = 'virtual-machines',
+    VirtualMachinesDetail = 'virtual-machines-detail',
     Servers = 'servers',
+
 
 }
 

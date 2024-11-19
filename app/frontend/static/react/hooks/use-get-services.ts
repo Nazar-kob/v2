@@ -18,10 +18,20 @@ async function getServers(): Promise<IServer[]> {
 
 export function useGetServices(): IServer[] {
 
-    const { data } = useSuspenseQuery<IServer[]>({
+    const { data, isError, isLoading } = useSuspenseQuery<IServer[]>({
         queryKey: [queryClientKeys.Servers],
         queryFn: getServers,
     });
+
+    if (isError) {
+        console.error("Error fetching servers data");
+        return [];
+    }
+
+    if (isLoading) {
+        return [];
+    }
+
 
     return data;
 }

@@ -61,10 +61,10 @@ class VmDetailView(APIView):
         if not vm:
             return Response({"details": "Vm not found"}, status=status.HTTP_404_NOT_FOUND)
 
-        serializer = VmDetailSerializer(vm, data=request.data, partial=True)
+        serializer = VmDetailSerializer(vm, data=request.data)
         if not serializer.is_valid():
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
+        
         serializer.save()
 
         return Response(serializer.data, status=status.HTTP_200_OK)

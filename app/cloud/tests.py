@@ -40,7 +40,7 @@ class VmDetailViewTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data['id'], self.vm.id)
         self.assertEqual(response.data['name'], self.vm.name)
-        self.assertEqual(response.data['server'], self.server.name)
+        self.assertEqual(response.data['server_id'], self.server.pk)
         
     def test_get_nonexistent_vm(self):
         response = self.client.get('/api/vms/999/')
@@ -48,10 +48,12 @@ class VmDetailViewTests(APITestCase):
         self.assertEqual(response.data['details'], "Vm not found")
         
     def test_update_vm_detail(self):
+        ser = Server.objects.create(name="Test Server", region="US-East")
         data = {
             "name": "Updated VM",
             "cpus": 4,
-            "ram": 16
+            "ram": 16,
+            "server_id": ser.pk
         }
         response = self.client.put(f'/api/vms/{self.vm.pk}/', data)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
@@ -59,6 +61,7 @@ class VmDetailViewTests(APITestCase):
         self.assertEqual(self.vm.name, "Updated VM")
         self.assertEqual(self.vm.cpus, 4)
         self.assertEqual(self.vm.ram, 16)
+        self.assertEqual(self.vm.server, ser)
         
     
     def test_delete_vm(self):
@@ -83,12 +86,12 @@ class ServiceTests(APITestCase):
         }
         response = self.client.post('/api/servers/', data)
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-        self.assertEqual(Server.objects.count(), 2)
+        self.assertEqual(Server.objects.count(), 5)
         
     def test_get_servers(self):
         response = self.client.get('/api/servers/')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(len(response.data), 1)
+        self.assertEqual(len(response.data), 4)
         
         
 class TestSshKey(APITestCase):

@@ -15,7 +15,7 @@ import {
   FormMessage,
 } from "../../ui/form";
 
-import { useGetServices } from "../../../hooks/get-services";
+import { useGetServices } from "../../../hooks/use-get-services";
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "../../../hooks/use-toast";
 import { queryClient, queryClientKeys } from "../../../const/query-client";
