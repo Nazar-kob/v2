@@ -48,6 +48,7 @@ export function SshKeysList({ vmId, open, setOpen }: SshKeysListProps) {
       toast({
         title: "An error occurred",
         description: "Failed to fetch VM",
+        variant: "error",
       });
       closeModal();
     }
