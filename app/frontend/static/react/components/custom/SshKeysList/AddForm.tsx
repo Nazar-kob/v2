@@ -14,52 +14,51 @@ import {
   FormLabel,
   FormMessage,
 } from "../../ui/form";
-
-import { useGetServices } from "../../../hooks/use-get-services";
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "../../../hooks/use-toast";
 import { queryClient, queryClientKeys } from "../../../const/query-client";
+import { Textarea } from "../../ui/textarea";
 
-const serverSchema = z.object({
+const sshKeySchema = z.object({
   name: z.string({ required_error: "Name is required" }),
-  region: z.string({ required_error: "Region is required" }),
+  public_key: z.string({ required_error: "Public key is required" }),
 });
-type ServerType = z.infer<typeof serverSchema>;
+type SshKeyType = z.infer<typeof sshKeySchema>;
 
-export function AddForm({ closeModal }: { closeModal: () => void }) {
-  const form = useForm<ServerType>({
-    resolver: zodResolver(serverSchema),
+interface PropsAddForm {
+  vmId: number;
+}
+
+export function AddForm({ vmId }: PropsAddForm) {
+  const form = useForm<SshKeyType>({
+    resolver: zodResolver(sshKeySchema),
     defaultValues: {
       name: "",
-      region: "",
+      public_key: "",
     },
   });
 
-  const servers = useGetServices();
-
   const mutation = useMutation({
-    mutationFn: async (serverValue: ServerType) => {
-      const res = await fetch("/api/servers/", {
+    mutationFn: async (newKey: SshKeyType) => {
+      const res = await fetch(`/api/vms/${vmId}/ssh-keys/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(serverValue),
+        body: JSON.stringify(newKey),
       });
       if (!res.ok) {
-        throw new Error("Error creating server");
+        throw new Error("Failed to create Key");
       }
-      return res.json();
     },
     onSuccess: async () => {
       form.reset();
       toast({
-        title: "Server created successfully",
-        description: "The Server has been created successfully",
+        title: "Ssh Key created successfully",
+        description: "The Ssh Key has been created successfully",
       });
-      closeModal();
       queryClient.invalidateQueries({
-        queryKey: [queryClientKeys.Servers],
+        queryKey: [queryClientKeys.VirtualMachinesDetailSshKeys, vmId],
         refetchType: "active",
       });
     },
@@ -72,7 +71,8 @@ export function AddForm({ closeModal }: { closeModal: () => void }) {
     },
   });
 
-  const onSubmit: SubmitHandler<ServerType> = (data) => {
+  const isLoading = form.formState.isSubmitting || mutation.isPending;
+  const onSubmit: SubmitHandler<SshKeyType> = (data) => {
     mutation.mutate(data);
   };
 
@@ -94,19 +94,25 @@ export function AddForm({ closeModal }: { closeModal: () => void }) {
         />
         <FormField
           control={form.control}
-          name="region"
+          name="public_key"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Region</FormLabel>
+              <FormLabel>Public key</FormLabel>
               <FormControl>
-                <Input placeholder="region" {...field} />
+                <Textarea
+                  placeholder="Your publick key here"
+                  className="resize-none"
+                  {...field}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
         <DialogFooter>
-          <Button type="submit">Save</Button>
+          <Button className="w-full" disabled={isLoading} type="submit">
+            Add
+          </Button>
         </DialogFooter>
       </form>
     </Form>

@@ -47,6 +47,7 @@ export function EditSheet({
       toast({
         title: "An error occurred",
         description: "Failed to fetch VM",
+        variant: "error",
       });
       closeModal();
     }
@@ -64,7 +65,7 @@ export function EditSheet({
         <SheetHeader>
           <SheetTitle>Edit</SheetTitle>
         </SheetHeader>
-        <EditForm id={id} vm={data!} closeModal={closeModal} />
+        {data && <EditForm id={id} vm={data} closeModal={closeModal} />}
       </SheetContent>
     </Sheet>
   );

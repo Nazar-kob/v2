@@ -76,6 +76,7 @@ export function AddForm({ closeModal }: { closeModal: () => void }) {
       toast({
         title: "An error occurred",
         description: error.message,
+        variant: "error",
       });
     },
   });

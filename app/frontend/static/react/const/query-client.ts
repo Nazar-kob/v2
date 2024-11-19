@@ -7,6 +7,7 @@ import {
 export enum queryClientKeys {
     VirtualMachines = 'virtual-machines',
     VirtualMachinesDetail = 'virtual-machines-detail',
+    VirtualMachinesDetailSshKeys = 'virtual-machines-detail-ssh-keys',
     Servers = 'servers',
 
 

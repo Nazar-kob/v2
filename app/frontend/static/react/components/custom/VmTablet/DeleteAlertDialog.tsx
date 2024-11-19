@@ -44,6 +44,7 @@ export function DeleteAlertDialog({
       toast({
         title: "An error occurred",
         description: error.message,
+        variant: "error",
       });
     },
   });

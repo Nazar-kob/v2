@@ -10,11 +10,14 @@ import { MoreHorizontal } from "lucide-react";
 import { Button } from "../../ui/button";
 import { DeleteAlertDialog } from "./DeleteAlertDialog";
 import { EditSheet } from "./EditSheet";
+import { SshKeysList } from "../SshKeysList/SshKeysList";
 
 export function ActionsBtn({ id }: { id: number }) {
   const [openEdit, setOpenEdit] = React.useState(false);
 
   const [openConfirm, setOpenConfirm] = React.useState(false);
+
+  const [openSshKeys, setOpenSshKeys] = React.useState(false);
 
   const onClickEdit = () => {
     setOpenEdit(true);
@@ -24,8 +27,13 @@ export function ActionsBtn({ id }: { id: number }) {
     setOpenConfirm(true);
   };
 
+  const onClickSshKeys = () => {
+    setOpenSshKeys(true);
+  };
+
   return (
     <>
+      <SshKeysList vmId={id} open={openSshKeys} setOpen={setOpenSshKeys} />
       <DeleteAlertDialog id={id} open={openConfirm} setOpen={setOpenConfirm} />
       <EditSheet id={id} open={openEdit} setIsOpen={setOpenEdit} />
       <DropdownMenu>
@@ -37,6 +45,7 @@ export function ActionsBtn({ id }: { id: number }) {
         <DropdownMenuContent align="end">
           <DropdownMenuItem onClick={onClickEdit}>Edit</DropdownMenuItem>
           <DropdownMenuItem onClick={onClickDelete}>Delete</DropdownMenuItem>
+          <DropdownMenuItem onClick={onClickSshKeys}>SsH keys</DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
     </>

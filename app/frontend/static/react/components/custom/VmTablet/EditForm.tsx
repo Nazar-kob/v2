@@ -87,16 +87,10 @@ export function EditForm({ id, vm, closeModal }: EditFormProps) {
       toast({
         title: "An error occurred",
         description: error.message,
+        variant: "error",
       });
     },
   });
-
-  const onError = (error: Error) => {
-    toast({
-      title: "An error occurred",
-      description: error.message,
-    });
-  };
 
   const isLoading = form.formState.isSubmitting || mutation.isPending;
   const onSubmit: SubmitHandler<VmDetail> = (data) => {
