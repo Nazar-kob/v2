@@ -6,28 +6,44 @@ This project includes several significant updates and improvements aimed at opti
 
 1. Replaced package managers:
 
-   - **Poetry** for Python.
+   - **Poetry** for Python. (Django, Django DRF (REST))
    - **Yarn** for TypeScript.
 
 2. Migrated the entire project from **JavaScript** to **TypeScript**.
 
 3. Added styling tools:
 
-   - **TailwindCSS** for responsive and modern designs.
-   - **shadcn/ui** for pre-built components.
+   - [**TailwindCSS**](https://tailwindcss.com/) for responsive and modern designs.
+   - [**shadcn/ui**](https://ui.shadcn.com/) for pre-built components.
 
 4. Backend Improvements:
 
-   - Created **endpoints** to fetch data from the backend.
+   - Created **endpoints** to fetch data from the backend. [React-Query](https://tanstack.com/query/latest)
    - Wrote **tests** for these endpoints using the **TDD** (Test-Driven Development) approach.
 
 5. Minimal Interface (MVP):
 
-   - Features include:
-     - Adding a new virtual machine.
-     - Viewing the list of machines.
-     - Deleting virtual machines.
-   - Editing functionality is planned but not yet implemented due to time constraints.
+- Features include:
+
+  - Add a new virtual machine.
+  - View the list of machines.
+  - Delete the virtual machine.
+  - Edit the virtual machines.
+
+- Ssh key
+
+  - Add to virtual machines
+  - View keys of virtual machines
+  - Delete from virtual machines
+
+- Server
+
+  - Add
+  - Delete
+
+- Ssh key
+  - Add to VM
+  - Delete from VM
 
 6. Deployment Updates:
 
