@@ -9,7 +9,7 @@ import {
 import { MoreHorizontal } from "lucide-react";
 import { Button } from "../../ui/button";
 import { DeleteAlertDialog } from "./DeleteAlertDialog";
-import { EditSheet } from "./EditSheet";
+import { EditSheet } from "../VmEdit/EditSheet";
 import { SshKeysList } from "../SshKeysList/SshKeysList";
 
 export function ActionsBtn({ id }: { id: number }) {

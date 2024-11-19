@@ -8,7 +8,7 @@ import {
 } from "../../ui/table";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { VmRaw } from "./VmRaw";
-import { AddModal } from "./AddModal";
+import { AddModal } from "../VmAdd/AddModal";
 import { queryClientKeys } from "../../../const/query-client";
 
 interface VirtualMachine {
