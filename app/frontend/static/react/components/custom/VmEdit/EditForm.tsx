@@ -32,7 +32,7 @@ const vmSchema = z.object({
   ram: z.number().positive({ message: "Ram must be greater than 0" }),
   cpus: z.number().positive({ message: "CPUS must be greater than 0" }),
   active: z.boolean({ message: "Active is required" }),
-  server_id: z.string({ message: "Server is required" }),
+  server_id: z.number({ message: "Server is required" }).positive(),
 });
 export type VmDetail = z.infer<typeof vmSchema>;
 
@@ -173,7 +173,7 @@ export function EditForm({ id, vm, closeModal }: EditFormProps) {
             <FormItem>
               <FormLabel>Server</FormLabel>
               <Select
-                onValueChange={field.onChange}
+                onValueChange={() => field.onChange(Number(field.value))}
                 defaultValue={field.value.toString()}
               >
                 <FormControl>
