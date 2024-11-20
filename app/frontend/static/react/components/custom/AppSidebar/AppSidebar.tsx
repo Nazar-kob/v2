@@ -28,7 +28,14 @@ export function AppSidebar({
       <Sidebar>
         <SidebarContent>
           <SidebarGroup>
-            <SidebarGroupLabel>V2</SidebarGroupLabel>
+            <SidebarGroupLabel className="flex justify-between p-2">
+              <img
+                src="https://dash.v2cloud.com/static/frontend/images/v2.png?v=0.10.43-6"
+                alt="logo"
+                className="w-12 h-12 p-2"
+              />
+              <span className="text-lg font-bold">V2 Cloud</span>
+            </SidebarGroupLabel>
             <SidebarGroupContent>
               <SidebarMenu>
                 {sidebarItems.map((item) => (

@@ -15,6 +15,7 @@ This project includes several significant updates and improvements aimed at opti
 
    - [**TailwindCSS**](https://tailwindcss.com/) for responsive and modern designs.
    - [**shadcn/ui**](https://ui.shadcn.com/) for pre-built components.
+   - [**React-Query**](https://tanstack.com/query/latest) for access to backend.
 
 4. Backend Improvements:
 
